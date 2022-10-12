@@ -1,0 +1,26 @@
+{
+	"pattrstorage" : 	{
+		"name" : "u782006274",
+		"slots" : 		{
+			"1" : 			{
+				"id" : 1,
+				"data" : 				{
+					"detune" : [ 0.0 ],
+					"fb_invert" : [ 0 ],
+					"feedback" : [ 0.855210918114144 ],
+					"harmonic_amplitudes" : [ 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0 ],
+					"mc.live.gain~" : [ -12.029283529641447 ],
+					"pickup1" : [ 0.0 ],
+					"pickup2" : [ 2.0 ],
+					"string_freq" : [ 0.23151364764268 ],
+					"harmonic" : [ 0.0 ],
+					"lowpass_freq" : [ 0.604342431761786 ]
+				}
+
+			}
+
+		}
+
+	}
+
+}
