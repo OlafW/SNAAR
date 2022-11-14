@@ -7005,6 +7005,20 @@
 				"type" : "iLaX"
 			}
 , 			{
+				"name" : "gen.onepole~.gendsp",
+				"bootpath" : "~/code/MaxMSP/Graduation Project - Max/gen",
+				"patcherrelativepath" : "./gen",
+				"type" : "gDSP",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "gen.waveguide~.gendsp",
+				"bootpath" : "~/code/MaxMSP/Graduation Project - Max/gen",
+				"patcherrelativepath" : "./gen",
+				"type" : "gDSP",
+				"implicit" : 1
+			}
+, 			{
 				"name" : "mpu2sig~.maxpat",
 				"bootpath" : "~/code/MaxMSP/Graduation Project - Max/util",
 				"patcherrelativepath" : "./util",
