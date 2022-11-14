@@ -4,7 +4,7 @@
 		"appversion" : 		{
 			"major" : 8,
 			"minor" : 5,
-			"revision" : 0,
+			"revision" : 1,
 			"architecture" : "x64",
 			"modernui" : 1
 		}
@@ -171,7 +171,7 @@
 						"appversion" : 						{
 							"major" : 8,
 							"minor" : 5,
-							"revision" : 0,
+							"revision" : 1,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -387,7 +387,7 @@
 						"appversion" : 						{
 							"major" : 8,
 							"minor" : 5,
-							"revision" : 0,
+							"revision" : 1,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -692,7 +692,7 @@
 						"appversion" : 						{
 							"major" : 8,
 							"minor" : 5,
-							"revision" : 0,
+							"revision" : 1,
 							"architecture" : "x64",
 							"modernui" : 1
 						}
@@ -1362,7 +1362,7 @@
 					"maxclass" : "ezdac~",
 					"numinlets" : 2,
 					"numoutlets" : 0,
-					"patching_rect" : [ 384.5, 680.0, 45.0, 45.0 ]
+					"patching_rect" : [ 380.5, 675.0, 45.0, 45.0 ]
 				}
 
 			}
@@ -1407,8 +1407,8 @@
 					"numinlets" : 8,
 					"numoutlets" : 2,
 					"outlettype" : [ "signal", "signal" ],
-					"patching_rect" : [ 373.0, 510.0, 291.0, 22.0 ],
-					"text" : "gen~ plucked_string~.gendsp"
+					"patching_rect" : [ 373.0, 522.0, 291.0, 22.0 ],
+					"text" : "gen~ gen.waveguide~"
 				}
 
 			}
@@ -1433,13 +1433,6 @@
 					"destination" : [ "obj-8", 1 ],
 					"order" : 0,
 					"source" : [ "obj-10", 0 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
-					"destination" : [ "obj-3", 1 ],
-					"source" : [ "obj-12", 1 ]
 				}
 
 			}
@@ -1715,21 +1708,7 @@
 			"inherited_shortname" : 1
 		}
 ,
-		"dependency_cache" : [ 			{
-				"name" : "gen.onepole~.gendsp",
-				"bootpath" : "~/code/MaxMSP/SNAAR/gen",
-				"patcherrelativepath" : "./gen",
-				"type" : "gDSP",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "plucked_string~.gendsp",
-				"bootpath" : "~/code/MaxMSP/SNAAR/gen",
-				"patcherrelativepath" : "./gen",
-				"type" : "gDSP",
-				"implicit" : 1
-			}
- ],
+		"dependency_cache" : [  ],
 		"autosave" : 0
 	}
 
