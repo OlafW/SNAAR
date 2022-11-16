@@ -130,7 +130,20 @@
 						"style" : "",
 						"subpatcher_template" : "",
 						"assistshowspatchername" : 0,
+						"visible" : 1,
 						"boxes" : [ 							{
+								"box" : 								{
+									"bubble" : 1,
+									"id" : "obj-11",
+									"maxclass" : "comment",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 326.0, 274.0, 150.0, 24.0 ],
+									"text" : "freq * 2 if high strike?"
+								}
+
+							}
+, 							{
 								"box" : 								{
 									"fontface" : 0,
 									"fontname" : "Arial",
@@ -8945,8 +8958,8 @@
 									"numinlets" : 1,
 									"numoutlets" : 2,
 									"outlettype" : [ "signal", "signal" ],
-									"patching_rect" : [ 431.0, 128.0, 98.0, 22.0 ],
-									"text" : "onset_velocity2~"
+									"patching_rect" : [ 431.0, 128.0, 124.0, 22.0 ],
+									"text" : "plate_onset_velocity~"
 								}
 
 							}
@@ -8973,8 +8986,8 @@
 									"numinlets" : 1,
 									"numoutlets" : 2,
 									"outlettype" : [ "signal", "signal" ],
-									"patching_rect" : [ 265.0, 129.0, 98.0, 22.0 ],
-									"text" : "onset_velocity2~"
+									"patching_rect" : [ 265.0, 129.0, 124.0, 22.0 ],
+									"text" : "plate_onset_velocity~"
 								}
 
 							}
@@ -9825,15 +9838,15 @@
 ,
 		"dependency_cache" : [ 			{
 				"name" : "audiodescriptors~.maxpat",
-				"bootpath" : "~/code/MaxMSP/Graduation Project - Max/util",
+				"bootpath" : "~/code/MaxMSP/Graduation Project - Code/PLATE - STRING/util",
 				"patcherrelativepath" : "./util",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "comparedb.maxpat",
-				"bootpath" : "~/code/MaxMSP/Graduation Project - Max/util",
-				"patcherrelativepath" : "./util",
+				"bootpath" : "~/code/MaxMSP/Graduation Project - Code/old",
+				"patcherrelativepath" : "../old",
 				"type" : "JSON",
 				"implicit" : 1
 			}
@@ -9859,71 +9872,71 @@
 			}
 , 			{
 				"name" : "gen.onepole~.gendsp",
-				"bootpath" : "~/code/MaxMSP/Graduation Project - Max/gen",
-				"patcherrelativepath" : "./gen",
+				"bootpath" : "~/code/MaxMSP/Graduation Project - Code/gen",
+				"patcherrelativepath" : "../gen",
 				"type" : "gDSP",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "gen.sampletimer~.gendsp",
-				"bootpath" : "~/code/MaxMSP/Graduation Project - Max/gen",
-				"patcherrelativepath" : "./gen",
+				"bootpath" : "~/code/MaxMSP/Graduation Project - Code/gen",
+				"patcherrelativepath" : "../gen",
 				"type" : "gDSP",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "gen.waveguide~.gendsp",
-				"bootpath" : "~/code/MaxMSP/Graduation Project - Max/gen",
-				"patcherrelativepath" : "./gen",
+				"bootpath" : "~/code/MaxMSP/Graduation Project - Code/gen",
+				"patcherrelativepath" : "../gen",
 				"type" : "gDSP",
 				"implicit" : 1
 			}
 , 			{
-				"name" : "onset_velocity2~.maxpat",
-				"bootpath" : "~/code/MaxMSP/Graduation Project - Max/util",
-				"patcherrelativepath" : "./util",
+				"name" : "onset_velocity~.maxpat",
+				"bootpath" : "~/code/MaxMSP/Graduation Project - Code/util",
+				"patcherrelativepath" : "../util",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
-				"name" : "onset_velocity~.maxpat",
-				"bootpath" : "~/code/MaxMSP/Graduation Project - Max/util",
+				"name" : "plate_onset_velocity~.maxpat",
+				"bootpath" : "~/code/MaxMSP/Graduation Project - Code/PLATE - STRING/util",
 				"patcherrelativepath" : "./util",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "sampletimer~.maxpat",
-				"bootpath" : "~/code/MaxMSP/Graduation Project - Max/util",
-				"patcherrelativepath" : "./util",
+				"bootpath" : "~/code/MaxMSP/Graduation Project - Code/util",
+				"patcherrelativepath" : "../util",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "time_correlation~.maxpat",
-				"bootpath" : "~/code/MaxMSP/Graduation Project - Max/util",
-				"patcherrelativepath" : "./util",
+				"bootpath" : "~/code/MaxMSP/timecorrelation",
+				"patcherrelativepath" : "../../timecorrelation",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "zsa.abs_bark_mel~.maxpat",
 				"bootpath" : "~/Documents/Max 8/Packages/zsa.descriptors/misc",
-				"patcherrelativepath" : "../../../Documents/Max 8/Packages/zsa.descriptors/misc",
+				"patcherrelativepath" : "../../../../Documents/Max 8/Packages/zsa.descriptors/misc",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "zsa.abs_freqpeak~.maxpat",
 				"bootpath" : "~/Documents/Max 8/Packages/zsa.descriptors/misc",
-				"patcherrelativepath" : "../../../Documents/Max 8/Packages/zsa.descriptors/misc",
+				"patcherrelativepath" : "../../../../Documents/Max 8/Packages/zsa.descriptors/misc",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "zsa.abs_mfcc~.maxpat",
 				"bootpath" : "~/Documents/Max 8/Packages/zsa.descriptors/misc",
-				"patcherrelativepath" : "../../../Documents/Max 8/Packages/zsa.descriptors/misc",
+				"patcherrelativepath" : "../../../../Documents/Max 8/Packages/zsa.descriptors/misc",
 				"type" : "JSON",
 				"implicit" : 1
 			}
@@ -9942,14 +9955,14 @@
 , 			{
 				"name" : "zsa.easy_freqpeak~.maxpat",
 				"bootpath" : "~/Documents/Max 8/Packages/zsa.descriptors/misc",
-				"patcherrelativepath" : "../../../Documents/Max 8/Packages/zsa.descriptors/misc",
+				"patcherrelativepath" : "../../../../Documents/Max 8/Packages/zsa.descriptors/misc",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "zsa.easy_mfcc~.maxpat",
 				"bootpath" : "~/Documents/Max 8/Packages/zsa.descriptors/misc",
-				"patcherrelativepath" : "../../../Documents/Max 8/Packages/zsa.descriptors/misc",
+				"patcherrelativepath" : "../../../../Documents/Max 8/Packages/zsa.descriptors/misc",
 				"type" : "JSON",
 				"implicit" : 1
 			}

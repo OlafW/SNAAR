@@ -46,7 +46,7 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "int" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 870.5, 258.0, 24.0, 24.0 ]
+					"patching_rect" : [ 864.5, 259.0, 24.0, 24.0 ]
 				}
 
 			}
@@ -57,7 +57,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "signal" ],
-					"patching_rect" : [ 860.0, 295.0, 29.5, 22.0 ],
+					"patching_rect" : [ 854.0, 296.0, 29.5, 22.0 ],
 					"text" : "*~"
 				}
 
@@ -68,7 +68,7 @@
 					"maxclass" : "newobj",
 					"numinlets" : 2,
 					"numoutlets" : 0,
-					"patching_rect" : [ 860.0, 351.0, 55.0, 22.0 ],
+					"patching_rect" : [ 854.0, 352.0, 55.0, 22.0 ],
 					"text" : "dac~ 1 2"
 				}
 
@@ -91,7 +91,7 @@
 					"maxclass" : "scope~",
 					"numinlets" : 2,
 					"numoutlets" : 0,
-					"patching_rect" : [ 710.0, 297.0, 130.0, 130.0 ]
+					"patching_rect" : [ 704.0, 298.0, 130.0, 130.0 ]
 				}
 
 			}
@@ -121,7 +121,7 @@
 				"box" : 				{
 					"comment" : "",
 					"id" : "obj-27",
-					"index" : 0,
+					"index" : 2,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -133,7 +133,7 @@
 				"box" : 				{
 					"comment" : "",
 					"id" : "obj-26",
-					"index" : 0,
+					"index" : 1,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
@@ -150,7 +150,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "signal" ],
-					"patching_rect" : [ 528.0, 276.14364599999999, 93.0, 22.0 ],
+					"patching_rect" : [ 528.0, 289.14364599999999, 93.0, 22.0 ],
 					"text" : "delay~ 180 180"
 				}
 
@@ -378,7 +378,7 @@
 									"maxclass" : "inlet",
 									"numinlets" : 0,
 									"numoutlets" : 1,
-									"outlettype" : [ "" ],
+									"outlettype" : [ "signal" ],
 									"patching_rect" : [ 483.0, 119.0, 30.0, 30.0 ]
 								}
 
@@ -417,7 +417,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 2,
 									"outlettype" : [ "signal", "" ],
-									"patching_rect" : [ 483.0, 335.0, 321.0, 62.0 ],
+									"patching_rect" : [ 483.0, 358.0, 321.0, 62.0 ],
 									"text" : "fluid.ampslice~ @onthreshold 6 @offthreshold 3 @fastrampdown 10 @fastrampup 10 @slowrampdown 70 @slowrampup 70 @floor -36 @minslicelength 4410 @highpassfreq 100"
 								}
 
@@ -535,7 +535,7 @@
  ]
 					}
 ,
-					"patching_rect" : [ 528.0, 227.0, 84.0, 22.0 ],
+					"patching_rect" : [ 528.0, 217.0, 84.0, 22.0 ],
 					"saved_object_attributes" : 					{
 						"description" : "",
 						"digest" : "",
@@ -551,11 +551,11 @@
 				"box" : 				{
 					"comment" : "",
 					"id" : "obj-51",
-					"index" : 0,
+					"index" : 1,
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
-					"outlettype" : [ "" ],
+					"outlettype" : [ "signal" ],
 					"patching_rect" : [ 376.0, 97.0, 30.0, 30.0 ]
 				}
 
@@ -643,6 +643,7 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-53", 1 ],
+					"midpoints" : [ 537.5, 278.0, 510.0, 278.0, 510.0, 279.0, 424.5, 279.0 ],
 					"order" : 3,
 					"source" : [ "obj-6", 0 ]
 				}
@@ -676,13 +677,7 @@
 				}
 
 			}
- ],
-		"dependency_cache" : [ 			{
-				"name" : "fluid.ampslice~.mxo",
-				"type" : "iLaX"
-			}
- ],
-		"autosave" : 0
+ ]
 	}
 
 }
