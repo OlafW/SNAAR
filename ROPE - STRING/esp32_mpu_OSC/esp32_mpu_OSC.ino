@@ -4,12 +4,9 @@
 #include <OSCBundle.h>
 #include <MPU6050_light.h>
 #include "networksettings.h"
+#include <esp_wifi.h>
 
 //------------------------------------Settings-----------------------------------------------//
-
-// Set this ID to 0 or 1 depending on the connected sensor.
-// The two ESP32s send data over the same port but use different IDs for OSC messages.
-const int mpu_ID = 1;
 
 // Smaller range means more sensitive
 enum GyroRanges { GYRO_250,
@@ -25,20 +22,33 @@ int gyroRange = GYRO_250;
 int accelRange = ACCEL_2G;
 const boolean mpuIsUpsideDown = true;  // MPU is mounted upside down in casing!
 
-//------------------------------------Settings-----------------------------------------------//
+//---------------------------------------------------------------------------------------------//
 
 WiFiUDP Udp;
 MPU6050 mpu(Wire);
+int mpuID;
 
 void setup() {
+  delay(2000);
   Serial.begin(115200);
-  Serial.println("Starting...");
   Wire.begin();
+  Serial.println("Starting...");
+
+  // Set OSC msg ID based on mac address
+  for (int i = 0; i < 2; i++) {
+    if (ESP.getEfuseMac() == esp_mac[i]) {
+      mpuID = i;
+      Serial.print("MPU ID is: ");
+      Serial.println(mpuID);
+      break;
+    }
+  }
 
   // Wifi setup
+  WiFi.mode(WIFI_STA);
   WiFi.begin(ssid, password);
   while (WiFi.waitForConnectResult() != WL_CONNECTED) {
-    Serial.println("WiFi setup failed");
+    Serial.println("Trying to connect to WiFi...");
     delay(1000);
   }
   Serial.println("\nWiFi connected");
@@ -86,12 +96,11 @@ void loop() {
 void sendOSC() {
   OSCBundle bundle;
 
-  if (mpu_ID == 0) {
+  if (mpuID == 0) {
     bundle.add("/mpu/0/accel").add(mpu.getAccX()).add(mpu.getAccY()).add(mpu.getAccZ());
     bundle.add("/mpu/0/gyro").add(mpu.getGyroX()).add(mpu.getGyroY()).add(mpu.getGyroZ());
     bundle.add("/mpu/0/angle").add(mpu.getAngleX()).add(mpu.getAngleY()).add(mpu.getAngleZ());
-  } 
-  else if (mpu_ID == 1) {
+  } else if (mpuID == 1) {
     bundle.add("/mpu/1/accel").add(mpu.getAccX()).add(mpu.getAccY()).add(mpu.getAccZ());
     bundle.add("/mpu/1/gyro").add(mpu.getGyroX()).add(mpu.getGyroY()).add(mpu.getGyroZ());
     bundle.add("/mpu/1/angle").add(mpu.getAngleX()).add(mpu.getAngleY()).add(mpu.getAngleZ());
@@ -130,13 +139,12 @@ void resetMPU(OSCMessage &msg) {
 
   // Send back confirmation message
   OSCMessage response;
-  if (mpu_ID == 0) {
+  if (mpuID == 0) {
     response.setAddress("/mpu/0/info");
-  }
-  else if (mpu_ID == 1) {
+  } else if (mpuID == 1) {
     response.setAddress("/mpu/1/info");
   }
-  response.add("Resetting MPU");
+  response.add("resetting MPU ").add(mpuID);
   Udp.beginPacket(outIP, outPort);
   response.send(Udp);
   Udp.endPacket();
@@ -166,7 +174,6 @@ void resetMPU(OSCMessage &msg) {
   mpu.calcOffsets(true, true);  // Calibrate gyro and accelerometer
   Serial.println("Done!\n");
 }
-
 
 int scanI2CAddresses() {
   byte error, address;

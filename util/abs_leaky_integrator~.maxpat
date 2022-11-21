@@ -102,7 +102,7 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 768.0, 71.0, 97.0, 20.0 ],
+					"patching_rect" : [ 766.0, 26.0, 97.0, 20.0 ],
 					"text" : "Leakyness (0, 1)"
 				}
 
@@ -114,7 +114,7 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "signal" ],
-					"patching_rect" : [ 794.0, 185.0, 33.0, 22.0 ],
+					"patching_rect" : [ 792.0, 129.0, 33.0, 22.0 ],
 					"text" : "!-~ 1"
 				}
 
@@ -150,7 +150,7 @@
 					"numinlets" : 3,
 					"numoutlets" : 1,
 					"outlettype" : [ "signal" ],
-					"patching_rect" : [ 588.0, 423.0, 70.0, 22.0 ],
+					"patching_rect" : [ 588.0, 416.0, 69.0, 22.0 ],
 					"text" : "thresh~ 0 1"
 				}
 
@@ -198,7 +198,7 @@
 					"numinlets" : 3,
 					"numoutlets" : 1,
 					"outlettype" : [ "signal" ],
-					"patching_rect" : [ 794.0, 149.0, 54.0, 22.0 ],
+					"patching_rect" : [ 792.0, 93.0, 54.0, 22.0 ],
 					"text" : "clip~ 0 1"
 				}
 
@@ -211,8 +211,8 @@
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
-					"outlettype" : [ "signal" ],
-					"patching_rect" : [ 794.0, 93.0, 30.0, 30.0 ]
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 792.0, 48.0, 30.0, 30.0 ]
 				}
 
 			}
@@ -284,7 +284,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "tapconnect" ],
-					"patching_rect" : [ 471.0, 511.0, 52.0, 22.0 ],
+					"patching_rect" : [ 471.0, 516.0, 52.0, 22.0 ],
 					"text" : "tapin~ 1"
 				}
 
