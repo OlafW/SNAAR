@@ -279,7 +279,7 @@
  ],
 		"dependency_cache" : [ 			{
 				"name" : "abs_leaky_integrator~.maxpat",
-				"bootpath" : "~/code/MaxMSP/Graduation Project - Max/util",
+				"bootpath" : "~/code/MaxMSP/Graduation Project - Code/util",
 				"patcherrelativepath" : ".",
 				"type" : "JSON",
 				"implicit" : 1
