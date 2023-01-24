@@ -29,12 +29,12 @@ MPU6050 mpu(Wire);
 int mpuID;
 
 void setup() {
-  delay(2000);
   Serial.begin(115200);
   Wire.begin();
+  delay(2000);
   Serial.println("Starting...");
 
-  // Set OSC msg ID based on mac address
+  // Set mpu ID based on mac address
   for (int i = 0; i < 2; i++) {
     if (ESP.getEfuseMac() == esp_mac[i]) {
       mpuID = i;
@@ -64,11 +64,13 @@ void setup() {
   // MPU6050 setup
   Serial.println("\nSetting up MPU6050");
   byte status = mpu.begin();
-  Serial.print(" status: ");
+  Serial.print("status: ");
   Serial.println(status);
 
   while (status != 0) {
-    Serial.println("MPU setup failed");
+    Serial.print("MPU setup failed");
+    Serial.print(" - error code: ");
+    Serial.println(status);
     delay(1000);
   }
 
@@ -94,17 +96,12 @@ void loop() {
 
 
 void sendOSC() {
+  String osc_addr = "/mpu/" + String(mpuID);
   OSCBundle bundle;
 
-  if (mpuID == 0) {
-    bundle.add("/mpu/0/accel").add(mpu.getAccX()).add(mpu.getAccY()).add(mpu.getAccZ());
-    bundle.add("/mpu/0/gyro").add(mpu.getGyroX()).add(mpu.getGyroY()).add(mpu.getGyroZ());
-    bundle.add("/mpu/0/angle").add(mpu.getAngleX()).add(mpu.getAngleY()).add(mpu.getAngleZ());
-  } else if (mpuID == 1) {
-    bundle.add("/mpu/1/accel").add(mpu.getAccX()).add(mpu.getAccY()).add(mpu.getAccZ());
-    bundle.add("/mpu/1/gyro").add(mpu.getGyroX()).add(mpu.getGyroY()).add(mpu.getGyroZ());
-    bundle.add("/mpu/1/angle").add(mpu.getAngleX()).add(mpu.getAngleY()).add(mpu.getAngleZ());
-  }
+  bundle.add((osc_addr + "/accel").c_str()).add(mpu.getAccX()).add(mpu.getAccY()).add(mpu.getAccZ());
+  bundle.add((osc_addr + "/gyro").c_str()).add(mpu.getGyroX()).add(mpu.getGyroY()).add(mpu.getGyroZ());
+  bundle.add((osc_addr + "/angle").c_str()).add(mpu.getAngleX()).add(mpu.getAngleY()).add(mpu.getAngleZ());
 
   Udp.beginPacket(outIP, outPort);
   bundle.send(Udp);
@@ -138,13 +135,10 @@ void resetMPU(OSCMessage &msg) {
   Serial.println("Resetting MPU");
 
   // Send back confirmation message
-  OSCMessage response;
-  if (mpuID == 0) {
-    response.setAddress("/mpu/0/info");
-  } else if (mpuID == 1) {
-    response.setAddress("/mpu/1/info");
-  }
-  response.add("resetting MPU ").add(mpuID);
+  String osc_addr = "/mpu/" + String(mpuID) + "/info";
+  OSCMessage response(osc_addr.c_str());
+  
+  response.add("resetting MPU");
   Udp.beginPacket(outIP, outPort);
   response.send(Udp);
   Udp.endPacket();
