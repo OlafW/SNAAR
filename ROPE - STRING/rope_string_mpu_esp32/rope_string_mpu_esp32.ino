@@ -8,7 +8,7 @@
 
 //------------------------------------Settings-----------------------------------------------//
 
-// Smaller range means more sensitive
+// Smaller range = higher sensitivity
 enum GyroRanges { GYRO_250,
                   GYRO_500,
                   GYRO_1000,
@@ -37,7 +37,7 @@ void setup() {
   // Set mpu ID based on mac address
   for (int i = 0; i < 2; i++) {
     if (ESP.getEfuseMac() == esp_mac[i]) {
-      mpuID = i;
+      mpuID = i + 1;
       Serial.print("MPU ID is: ");
       Serial.println(mpuID);
       break;
@@ -97,16 +97,15 @@ void loop() {
 
 void sendOSC() {
   String osc_addr = "/mpu/" + String(mpuID);
-  OSCBundle bundle;
+  OSCMessage msg(osc_addr.c_str());
 
-  bundle.add((osc_addr + "/accel").c_str()).add(mpu.getAccX()).add(mpu.getAccY()).add(mpu.getAccZ());
-  bundle.add((osc_addr + "/gyro").c_str()).add(mpu.getGyroX()).add(mpu.getGyroY()).add(mpu.getGyroZ());
-  bundle.add((osc_addr + "/angle").c_str()).add(mpu.getAngleX()).add(mpu.getAngleY()).add(mpu.getAngleZ());
+  // Send abs gyro and angle x, y
+  msg.add(getAbsGyro()).add(mpu.getAngleX()).add(mpu.getAngleY());
 
   Udp.beginPacket(outIP, outPort);
-  bundle.send(Udp);
+  msg.send(Udp);
   Udp.endPacket();
-  bundle.empty();
+  msg.empty();
 }
 
 
@@ -128,6 +127,49 @@ void receiveOSC() {
     }
     msg.empty();
   }
+}
+
+float getAbsGyro() {
+  const static float abs_norm = sqrt(3);
+
+  float absGyro = sqrt(mpu.getGyroX() * mpu.getGyroX() + 
+                       mpu.getGyroY() * mpu.getGyroY() + 
+                       mpu.getGyroZ() * mpu.getGyroZ());
+
+  if (gyroRange == GYRO_250) absGyro /= 250.0;
+  else if (gyroRange == GYRO_500) absGyro /= 500.0;
+  else if (gyroRange == GYRO_1000) absGyro /= 1000.0;
+  else if (gyroRange == GYRO_2000) absGyro /= 2000.0;
+
+  return absGyro / abs_norm;
+}
+
+float getAbsAccel() {
+  const static float abs_norm = sqrt(3);
+
+  float absAccel = sqrt(mpu.getAccX() * mpu.getAccX() + 
+                        mpu.getAccY() * mpu.getAccY() + 
+                        mpu.getAccZ() * mpu.getAccZ());
+
+  if (accelRange == ACCEL_2G) absAccel /= 2.0;
+  else if (accelRange == ACCEL_4G) absAccel /= 4.0;
+  else if (accelRange == ACCEL_8G) absAccel /= 8.0;
+  else if (accelRange == ACCEL_16G) absAccel /= 16.0;
+
+  return absAccel / abs_norm;
+}
+
+void sendAllData() {
+  OSCBundle bundle;
+
+  bundle.add("/mpu/accel").add(mpu.getAccX()).add(mpu.getAccY()).add(mpu.getAccZ());
+  bundle.add("/mpu/gyro").add(mpu.getGyroX()).add(mpu.getGyroY()).add(mpu.getGyroZ());
+  bundle.add("/mpu/angle").add(mpu.getAngleX()).add(mpu.getAngleY()).add(mpu.getAngleZ());
+
+  Udp.beginPacket(outIP, outPort);
+  bundle.send(Udp);
+  Udp.endPacket();
+  bundle.empty();
 }
 
 
