@@ -1,10 +1,10 @@
 #include "Wire.h"
 #include "WiFi.h"
+#include <esp_wifi.h>
 #include <OSCMessage.h>
 #include <OSCBundle.h>
 #include <MPU6050_light.h>
 #include "networksettings.h"
-#include <esp_wifi.h>
 
 //------------------------------------Settings-----------------------------------------------//
 
@@ -20,29 +20,36 @@ enum AccelRanges { ACCEL_2G,
 
 int gyroRange = GYRO_250;
 int accelRange = ACCEL_2G;
-const boolean mpuIsUpsideDown = true;  // MPU is mounted upside down in casing!
+const boolean mpuIsUpsideDown = false;
 
 //---------------------------------------------------------------------------------------------//
 
 WiFiUDP Udp;
 MPU6050 mpu(Wire);
+
 int mpuID;
+OSCMessage outMessage;
+
+unsigned long prevMillis = 0;
+unsigned int receiveOSCinterval = 500;  // ms
 
 void setup() {
-  Serial.begin(115200);
+  Serial.begin(921600);
   Wire.begin();
   delay(2000);
   Serial.println("Starting...");
-
+  
   // Set mpu ID based on mac address
   for (int i = 0; i < 2; i++) {
     if (ESP.getEfuseMac() == esp_mac[i]) {
       mpuID = i + 1;
-      Serial.print("MPU ID is: ");
-      Serial.println(mpuID);
-      break;
+      // Set OSC address of outgoing messages
+      String OSC_address = ("/mpu/" + String(mpuID));
+      outMessage.setAddress(OSC_address.c_str());
     }
   }
+  Serial.print("MPU ID is: ");
+  Serial.println(mpuID);
 
   // Wifi setup
   WiFi.mode(WIFI_STA);
@@ -91,21 +98,22 @@ void loop() {
   mpu.update();
 
   sendOSC();
-  receiveOSC();
+  if (millis() - prevMillis > receiveOSCinterval) {
+    receiveOSC();
+    prevMillis = millis();
+  }
 }
 
 
 void sendOSC() {
-  String osc_addr = "/mpu/" + String(mpuID);
-  OSCMessage msg(osc_addr.c_str());
-
-  // Send abs gyro and angle x, y
-  msg.add(getAbsGyro()).add(mpu.getAngleX()).add(mpu.getAngleY());
+  // Send gyro magnitude and angle x, y
+  outMessage.add(getGyroMag());
+  outMessage.add(mpu.getAngleX()).add(mpu.getAngleY()).add(mpu.getAngleZ());
 
   Udp.beginPacket(outIP, outPort);
-  msg.send(Udp);
+  outMessage.send(Udp);
   Udp.endPacket();
-  msg.empty();
+  outMessage.empty();
 }
 
 
@@ -129,34 +137,34 @@ void receiveOSC() {
   }
 }
 
-float getAbsGyro() {
+float getGyroMag() {
   const static float abs_norm = sqrt(3);
 
-  float absGyro = sqrt(mpu.getGyroX() * mpu.getGyroX() + 
-                       mpu.getGyroY() * mpu.getGyroY() + 
-                       mpu.getGyroZ() * mpu.getGyroZ());
+  float gyroMag = sqrt(mpu.getGyroX() * mpu.getGyroX() + mpu.getGyroY() * mpu.getGyroY() + mpu.getGyroZ() * mpu.getGyroZ());
 
-  if (gyroRange == GYRO_250) absGyro /= 250.0;
-  else if (gyroRange == GYRO_500) absGyro /= 500.0;
-  else if (gyroRange == GYRO_1000) absGyro /= 1000.0;
-  else if (gyroRange == GYRO_2000) absGyro /= 2000.0;
+  if (gyroRange == GYRO_250) gyroMag /= 250.0;
+  else if (gyroRange == GYRO_500) gyroMag /= 500.0;
+  else if (gyroRange == GYRO_1000) gyroMag /= 1000.0;
+  else if (gyroRange == GYRO_2000) gyroMag /= 2000.0;
 
-  return absGyro / abs_norm;
+  gyroMag /= abs_norm;  // normalize (0-1)
+
+  return gyroMag;
 }
 
-float getAbsAccel() {
+float getAccelMag() {
   const static float abs_norm = sqrt(3);
 
-  float absAccel = sqrt(mpu.getAccX() * mpu.getAccX() + 
-                        mpu.getAccY() * mpu.getAccY() + 
-                        mpu.getAccZ() * mpu.getAccZ());
+  float accelMag = sqrt(mpu.getAccX() * mpu.getAccX() + mpu.getAccY() * mpu.getAccY() + mpu.getAccZ() * mpu.getAccZ());
 
-  if (accelRange == ACCEL_2G) absAccel /= 2.0;
-  else if (accelRange == ACCEL_4G) absAccel /= 4.0;
-  else if (accelRange == ACCEL_8G) absAccel /= 8.0;
-  else if (accelRange == ACCEL_16G) absAccel /= 16.0;
+  if (accelRange == ACCEL_2G) accelMag /= 2.0;
+  else if (accelRange == ACCEL_4G) accelMag /= 4.0;
+  else if (accelRange == ACCEL_8G) accelMag /= 8.0;
+  else if (accelRange == ACCEL_16G) accelMag /= 16.0;
 
-  return absAccel / abs_norm;
+  accelMag /= abs_norm;
+
+  return accelMag;
 }
 
 void sendAllData() {
@@ -172,14 +180,13 @@ void sendAllData() {
   bundle.empty();
 }
 
-
-void resetMPU(OSCMessage &msg) {
+void resetMPU(OSCMessage& msg) {
   Serial.println("Resetting MPU");
 
   // Send back confirmation message
-  String osc_addr = "/mpu/" + String(mpuID) + "/info";
-  OSCMessage response(osc_addr.c_str());
-  
+  String OSC_address = "/mpu/" + String(mpuID) + "/info";
+  OSCMessage response(OSC_address.c_str());
+
   response.add("resetting MPU");
   Udp.beginPacket(outIP, outPort);
   response.send(Udp);

@@ -1,31 +1,41 @@
 #include <OSCMessage.h>
 #include <SLIPEncodedSerial.h>
 
+/*
+  Hall Sensor is connected to A0 of Arduino Nano
+  For Arduino Nano clone board: set Processor to "ATmega328P (Old Bootloader)" in Tools/Processor
+*/
+
 SLIPEncodedSerial SLIPSerial(Serial);
 
-const int hallSensor = 25;  // lolin32
-const bool plotSerial = false; 
+const int hallSensor = A0;
+const bool plotSerial = false;
 
 void setup() {
-  SLIPSerial.begin(921600);
+  if (plotSerial) {
+    SLIPSerial.begin(9600);
+  } else {
+    // Maximum baudrate in Max seems to be 1843200 bps
+    SLIPSerial.begin(1843200);
+  }
   pinMode(hallSensor, INPUT);
 }
 
 void loop() {
   int val = analogRead(hallSensor);
 
-  // float voltage = val / 1023.0;  //uno
-  
-  float voltage = val / 4096.0; //lolin32
-  voltage = voltage * 2.0 - 1.0;
+  float voltage = val / 1023.0;   // 10 bit
+  voltage = voltage * 2.0 - 1.0;  // (-1, 1)
 
   if (plotSerial) {
-    Serial.print(-1);
-    Serial.print(' ');
-    Serial.print(1);
-    Serial.print(' ');
-    Serial.println(voltage);
+    SLIPSerial.print(-1);
+    SLIPSerial.print(' ');
+    SLIPSerial.print(1);
+    SLIPSerial.print(' ');
+    SLIPSerial.println(voltage);
   } 
+  
+  // Send OSC over Serial
   else {
     OSCMessage msg("/hall");
     msg.add(voltage);
