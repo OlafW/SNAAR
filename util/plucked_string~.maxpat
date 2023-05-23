@@ -40,13 +40,29 @@
 		"assistshowspatchername" : 0,
 		"boxes" : [ 			{
 				"box" : 				{
+					"fontface" : 0,
+					"fontname" : "Arial",
+					"fontsize" : 12.0,
+					"id" : "obj-7",
+					"maxclass" : "number~",
+					"mode" : 2,
+					"numinlets" : 2,
+					"numoutlets" : 2,
+					"outlettype" : [ "signal", "float" ],
+					"patching_rect" : [ 365.0, 220.0, 102.0, 22.0 ],
+					"sig" : 0.0
+				}
+
+			}
+, 			{
+				"box" : 				{
 					"id" : "obj-6",
 					"maxclass" : "newobj",
 					"numinlets" : 6,
 					"numoutlets" : 1,
 					"outlettype" : [ "signal" ],
 					"patching_rect" : [ 310.601190467261915, 190.0, 134.0, 22.0 ],
-					"text" : "scale~ 0 1 100 20000 2"
+					"text" : "scale~ 0 1 100 10000 4"
 				}
 
 			}
@@ -81,8 +97,8 @@
 					"numinlets" : 1,
 					"numoutlets" : 1,
 					"outlettype" : [ "signal" ],
-					"patching_rect" : [ 1093.21428536734652, 291.0, 41.0, 22.0 ],
-					"text" : "sig~ 2"
+					"patching_rect" : [ 1093.21428536734652, 291.0, 40.78571463265348, 22.0 ],
+					"text" : "sig~ 4"
 				}
 
 			}
@@ -94,7 +110,7 @@
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
-					"outlettype" : [ "signal" ],
+					"outlettype" : [ "" ],
 					"patching_rect" : [ 835.071428938775853, 113.0, 30.0, 30.0 ]
 				}
 
@@ -154,8 +170,8 @@
 					"numinlets" : 6,
 					"numoutlets" : 1,
 					"outlettype" : [ "signal" ],
-					"patching_rect" : [ 964.142857153061186, 260.0, 130.0, 22.0 ],
-					"text" : "scale~ 0. 1. 0.05 1. 1.5"
+					"patching_rect" : [ 964.142857153061186, 260.0, 120.0, 22.0 ],
+					"text" : "scale~ 0. 1. 0.05 1. 2"
 				}
 
 			}
@@ -489,7 +505,7 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-3", 1 ],
-					"order" : 1,
+					"order" : 2,
 					"source" : [ "obj-6", 0 ]
 				}
 
@@ -497,6 +513,14 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-4", 1 ],
+					"order" : 1,
+					"source" : [ "obj-6", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-7", 0 ],
 					"order" : 0,
 					"source" : [ "obj-6", 0 ]
 				}

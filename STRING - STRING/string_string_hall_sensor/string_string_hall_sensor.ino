@@ -9,7 +9,7 @@
 SLIPEncodedSerial SLIPSerial(Serial);
 
 const int hallSensor = A0;
-const bool plotSerial = false;
+const bool plotSerial = false; // debug
 
 void setup() {
   if (plotSerial) {
