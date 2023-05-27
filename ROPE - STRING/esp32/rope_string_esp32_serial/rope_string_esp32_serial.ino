@@ -89,8 +89,9 @@ void loop() {
 }
 
 void sendOSC_Serial() {
-  // Send abs gyro and angle x, y
+  // Send gyro mag, accel mag and angle x, y, z
   outMessage.add(getGyroMag());
+  outMessage.add(getAccelMag());
   outMessage.add(mpu.getAngleX()).add(mpu.getAngleY()).add(mpu.getAngleZ());
 
   SLIPSerial.beginPacket();
@@ -122,7 +123,9 @@ void receiveOSC_Wifi() {
 float getGyroMag() {
   const static float abs_norm = sqrt(3);
 
-  float gyroMag = sqrt(mpu.getGyroX() * mpu.getGyroX() + mpu.getGyroY() * mpu.getGyroY() + mpu.getGyroZ() * mpu.getGyroZ());
+  float gyroMag = sqrt(mpu.getGyroX() * mpu.getGyroX() + 
+                       mpu.getGyroY() * mpu.getGyroY() + 
+                       mpu.getGyroZ() * mpu.getGyroZ());
 
   if (gyroRange == GYRO_250) gyroMag /= 250.0;
   else if (gyroRange == GYRO_500) gyroMag /= 500.0;
@@ -137,7 +140,9 @@ float getGyroMag() {
 float getAccelMag() {
   const static float abs_norm = sqrt(3);
 
-  float accelMag = sqrt(mpu.getAccX() * mpu.getAccX() + mpu.getAccY() * mpu.getAccY() + mpu.getAccZ() * mpu.getAccZ());
+  float accelMag = sqrt(mpu.getAccX() * mpu.getAccX() + 
+                        mpu.getAccY() * mpu.getAccY() + 
+                        mpu.getAccZ() * mpu.getAccZ());
 
   if (accelRange == ACCEL_2G) accelMag /= 2.0;
   else if (accelRange == ACCEL_4G) accelMag /= 4.0;
