@@ -1,10 +1,10 @@
-#include <OSCMessage.h>
-#include <SLIPEncodedSerial.h>
-
 /*
   Two Hall Sensors connected to A0 and A1 of Arduino Nano
   For Arduino Nano clone board: set Processor to "ATmega328P (Old Bootloader)" in Tools/Processor
 */
+
+#include <OSCMessage.h>
+#include <SLIPEncodedSerial.h>
 
 SLIPEncodedSerial SLIPSerial(Serial);
 
