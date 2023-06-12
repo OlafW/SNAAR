@@ -90,11 +90,11 @@
 				"box" : 				{
 					"comment" : "Lowpass (0, 1)",
 					"id" : "obj-1",
-					"index" : 8,
+					"index" : 0,
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
-					"outlettype" : [ "signal" ],
+					"outlettype" : [ "" ],
 					"patching_rect" : [ 835.071428938775853, 113.0, 30.0, 30.0 ]
 				}
 
@@ -224,9 +224,9 @@
 					"maxclass" : "newobj",
 					"numinlets" : 7,
 					"numoutlets" : 2,
-					"outlettype" : [ "signal", "signal" ],
+					"outlettype" : [ "multichannelsignal", "multichannelsignal" ],
 					"patching_rect" : [ 207.0, 300.0, 406.607142803571378, 22.0 ],
-					"text" : "gen~ gen.waveguide~"
+					"text" : "mc.gen~ gen.waveguide~ @chans 5"
 				}
 
 			}
@@ -234,11 +234,11 @@
 				"box" : 				{
 					"comment" : "Input 1",
 					"id" : "obj-5",
-					"index" : 1,
+					"index" : 0,
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
-					"outlettype" : [ "signal" ],
+					"outlettype" : [ "" ],
 					"patching_rect" : [ 207.000004153061184, 100.0, 30.0, 30.0 ]
 				}
 
@@ -247,11 +247,11 @@
 				"box" : 				{
 					"comment" : "Input 2",
 					"id" : "obj-13",
-					"index" : 2,
+					"index" : 0,
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
-					"outlettype" : [ "signal" ],
+					"outlettype" : [ "" ],
 					"patching_rect" : [ 271.601190467261915, 100.0, 30.0, 30.0 ]
 				}
 
@@ -260,11 +260,11 @@
 				"box" : 				{
 					"comment" : "Pluck position",
 					"id" : "obj-18",
-					"index" : 3,
+					"index" : 0,
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
-					"outlettype" : [ "signal" ],
+					"outlettype" : [ "" ],
 					"patching_rect" : [ 336.202380934523831, 100.0, 30.0, 30.0 ]
 				}
 
@@ -273,11 +273,11 @@
 				"box" : 				{
 					"comment" : "Pickup pos 1",
 					"id" : "obj-21",
-					"index" : 4,
+					"index" : 0,
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
-					"outlettype" : [ "signal" ],
+					"outlettype" : [ "" ],
 					"patching_rect" : [ 400.803571401785689, 100.0, 30.0, 30.0 ]
 				}
 
@@ -286,11 +286,11 @@
 				"box" : 				{
 					"comment" : "Pickup pos 2",
 					"id" : "obj-22",
-					"index" : 5,
+					"index" : 0,
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
-					"outlettype" : [ "signal" ],
+					"outlettype" : [ "" ],
 					"patching_rect" : [ 465.404761869047604, 100.0, 30.0, 30.0 ]
 				}
 
@@ -299,11 +299,11 @@
 				"box" : 				{
 					"comment" : "String frequency (Hz)",
 					"id" : "obj-23",
-					"index" : 6,
+					"index" : 0,
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
-					"outlettype" : [ "signal" ],
+					"outlettype" : [ "" ],
 					"patching_rect" : [ 530.00595233630952, 100.0, 30.0, 30.0 ]
 				}
 
@@ -312,11 +312,11 @@
 				"box" : 				{
 					"comment" : "Decaytime (ms)",
 					"id" : "obj-27",
-					"index" : 7,
+					"index" : 0,
 					"maxclass" : "inlet",
 					"numinlets" : 0,
 					"numoutlets" : 1,
-					"outlettype" : [ "signal" ],
+					"outlettype" : [ "" ],
 					"patching_rect" : [ 594.607142803571378, 100.0, 30.0, 30.0 ]
 				}
 
@@ -325,11 +325,11 @@
 				"box" : 				{
 					"comment" : "",
 					"id" : "obj-28",
-					"index" : 1,
+					"index" : 0,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 207.000004153061184, 508.0, 30.0, 30.0 ]
+					"patching_rect" : [ 207.0, 381.0, 30.0, 30.0 ]
 				}
 
 			}
@@ -337,11 +337,11 @@
 				"box" : 				{
 					"comment" : "",
 					"id" : "obj-30",
-					"index" : 2,
+					"index" : 0,
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 594.607142803571378, 516.0, 30.0, 30.0 ]
+					"patching_rect" : [ 594.607138650510251, 389.0, 30.0, 30.0 ]
 				}
 
 			}
@@ -533,7 +533,30 @@
 				}
 
 			}
- ]
+ ],
+		"dependency_cache" : [ 			{
+				"name" : "fir64~.maxpat",
+				"bootpath" : "~/Desktop/Graduation Project/Graduation Project - Code/util",
+				"patcherrelativepath" : ".",
+				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "gen.fir64~.gendsp",
+				"bootpath" : "~/Desktop/Graduation Project/Graduation Project - Code/gen",
+				"patcherrelativepath" : "../gen",
+				"type" : "gDSP",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "gen.waveguide~.gendsp",
+				"bootpath" : "~/Desktop/Graduation Project/Graduation Project - Code/gen",
+				"patcherrelativepath" : "../gen",
+				"type" : "gDSP",
+				"implicit" : 1
+			}
+ ],
+		"autosave" : 0
 	}
 
 }
