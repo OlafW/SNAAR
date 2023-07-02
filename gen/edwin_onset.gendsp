@@ -4,7 +4,7 @@
 		"appversion" : 		{
 			"major" : 8,
 			"minor" : 5,
-			"revision" : 4,
+			"revision" : 5,
 			"architecture" : "x64",
 			"modernui" : 1
 		}
@@ -90,11 +90,11 @@
 				"box" : 				{
 					"id" : "obj-35",
 					"maxclass" : "newobj",
-					"numinlets" : 1,
+					"numinlets" : 0,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 821.0, 409.0, 72.0, 22.0 ],
-					"text" : "+ debounce"
+					"patching_rect" : [ 821.0, 409.0, 68.0, 22.0 ],
+					"text" : "f debounce"
 				}
 
 			}
@@ -472,11 +472,11 @@
 				"box" : 				{
 					"id" : "obj-47",
 					"maxclass" : "newobj",
-					"numinlets" : 1,
+					"numinlets" : 0,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 266.25, 489.0, 72.0, 22.0 ],
-					"text" : "+ debounce"
+					"patching_rect" : [ 266.25, 489.0, 68.0, 22.0 ],
+					"text" : "f debounce"
 				}
 
 			}
@@ -532,11 +532,11 @@
 				"box" : 				{
 					"id" : "obj-7",
 					"maxclass" : "newobj",
-					"numinlets" : 1,
+					"numinlets" : 0,
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
-					"patching_rect" : [ 750.0, 193.0, 59.0, 22.0 ],
-					"text" : "+ window"
+					"patching_rect" : [ 750.0, 193.0, 55.0, 22.0 ],
+					"text" : "f window"
 				}
 
 			}

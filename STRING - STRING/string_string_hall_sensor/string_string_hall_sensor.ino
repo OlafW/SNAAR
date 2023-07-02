@@ -11,7 +11,7 @@ SLIPEncodedSerial SLIPSerial(Serial);
 const int hallSensor1 = A0;
 const int hallSensor2 = A1;
 
-const bool plotSerial = false;  // debug
+const bool plotSerial = false;
 
 void setup() {
   if (plotSerial) {
@@ -48,9 +48,23 @@ void loop() {
   else {
     OSCMessage msg("/hall");
     msg.add(hall1).add(hall2);
+
+    // Send sample frequency 
+    // msg.add(getSampleFrequency());
+
     SLIPSerial.beginPacket();
     msg.send(SLIPSerial);
     SLIPSerial.endPacket();
     msg.empty();
   }
+}
+
+float getSampleFrequency() {
+  static unsigned long prevMicros = micros();
+
+  unsigned long dt = micros() - prevMicros;
+  float sampleFreq = 1.0 / (dt / 1.0e6);
+  prevMicros = micros();
+
+  return sampleFreq;
 }
