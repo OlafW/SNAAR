@@ -2820,8 +2820,8 @@
 									"numinlets" : 2,
 									"numoutlets" : 2,
 									"outlettype" : [ "signal", "signal" ],
-									"patching_rect" : [ 732.0, 417.0, 44.0, 22.0 ],
-									"text" : "cross~"
+									"patching_rect" : [ 732.0, 417.0, 74.0, 22.0 ],
+									"text" : "cross~ 1000"
 								}
 
 							}
@@ -3873,7 +3873,7 @@
 									"patching_rect" : [ 40.75, 330.0, 18.0, 66.0 ],
 									"shape" : 1,
 									"size" : 4,
-									"value" : 0
+									"value" : 2
 								}
 
 							}
@@ -5062,7 +5062,6 @@
 									"offset" : [ 0.0, 0.0 ],
 									"outlettype" : [ "signal", "signal", "", "" ],
 									"patching_rect" : [ 256.0, 406.0, 102.0, 196.0 ],
-									"presentation_linecount" : 8,
 									"saved_attribute_attributes" : 									{
 										"valueof" : 										{
 											"parameter_invisible" : 1,
